@@ -1,6 +1,7 @@
 FROM base/archlinux 
 MAINTAINER You "you@your.email"
-
+ADD pacman.conf /etc/pacman.conf
+ADD mirrorlist /etc/pacman.d/mirrorlist
 # get the current package list
 RUN pacman -Suy --noconfirm
 RUN pacman -S --noconfirm tomcat7  
