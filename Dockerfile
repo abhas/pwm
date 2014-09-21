@@ -5,7 +5,11 @@ ADD mirrorlist /etc/pacman.d/mirrorlist
 # get the current package list
 RUN pacman -Suy --noconfirm
 RUN pacman -S --noconfirm tomcat7 fastjar
-ADD pwm.war /var/lib/tomcat7/webapps/pwm.war
+RUN mkdir /pwm
+ADD pwm.war /pwm/pwm.war
+RUN cd /pwm && fastjar xvf pwm.war && rm -f /pwm/pwm.war
+RUN mv /pwm /var/lib/tomcat7/webapps/pwm
+ADD mysql-connector-java-5.1.32-bin.jar /var/lib/tomcat7/webapps/pwm/WEB-INF/lib/mysql-connector-java-5.1.32-bin.jar
 ADD tomcat-users.xml /etc/tomcat7/tomcat-users.xml
 #RUN mkdir /usr/share/tomcat7/temp
 #RUN ln -s /etc/tomcat7/ /usr/share/tomcat7/conf
