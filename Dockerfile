@@ -1,9 +1,10 @@
 FROM base/archlinux 
-MAINTAINER You "you@your.email"
+MAINTAINER Abhas Abhinav "abhas@deeproot.in"
 ADD pacman.conf /etc/pacman.conf
 ADD mirrorlist /etc/pacman.d/mirrorlist
 # get the current package list
 RUN pacman -Suy --noconfirm
+RUN pacman-db-upgrade
 RUN pacman -S --noconfirm tomcat7 tomcat-native fastjar
 RUN mkdir /pwm
 ADD pwm.war /pwm/pwm.war
